@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Model Interface</title>
+  <title>Modelos de TI Inteligentes</title>
   <style>
     * {
       margin: 0;
@@ -17,70 +17,45 @@
       color: #e0e0e0;
     }
 
-    /* LOADING PAGE */
-    #loading {
-      height: 100vh;
-      width: 100vw;
-      background: radial-gradient(circle at center, #121212, #0a0a0a);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
-      animation: pulseBg 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulseBg {
-      from { background-color: #0a0a0a; }
-      to { background-color: #121212; }
-    }
-
-    .tech-text {
-      font-size: 2rem;
-      letter-spacing: 2px;
-      color: #00e5ff;
-      border-right: 2px solid #00e5ff;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 32ch;
-      animation: typing 4s steps(32), blink .7s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 32ch }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-
-    .loading-sub {
-      margin-top: 20px;
-      text-align: center;
-      max-width: 600px;
-      font-size: 1.1rem;
-      color: #cccccc;
-    }
-
-    /* MAIN PAGE */
-    #main {
+    .page {
       display: none;
       padding: 40px;
       max-width: 1200px;
       margin: auto;
-      background: #0e0e0e;
+    }
+
+    .active {
+      display: block;
     }
 
     h1 {
       color: #00e5ff;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
-    h2 {
-      margin-bottom: 10px;
-      color: #00bcd4;
+    button {
+      margin-top: 30px;
+      padding: 12px 28px;
+      background-color: #00e5ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00bcd4;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #ccc;
+      text-align: justify;
     }
 
     .section {
@@ -96,6 +71,10 @@
       transform: translateY(-4px);
     }
 
+    h2 {
+      color: #00bcd4;
+    }
+
     textarea {
       width: 100%;
       height: 100px;
@@ -108,22 +87,6 @@
       font-size: 1rem;
     }
 
-    button {
-      margin-top: 12px;
-      padding: 10px 24px;
-      background-color: #00e5ff;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #00bcd4;
-    }
-
     .output {
       margin-top: 15px;
       color: #a0f0ff;
@@ -132,28 +95,35 @@
       padding-top: 10px;
     }
 
-    @media screen and (max-width: 600px) {
-      .tech-text {
-        font-size: 1.2rem;
-        width: 24ch;
-        animation: typing 3s steps(24), blink .7s step-end infinite;
-      }
+    .center {
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <!-- Loading Page -->
-  <div id="loading">
-    <div class="tech-text">Cargando sistema de inteligencia artificial...</div>
-    <p class="loading-sub">
-      Interfaz inteligente para procesamiento de lenguaje natural con modelos T5 de Google. Automatiza resúmenes, preguntas y traducciones.
-    </p>
+  <!-- Página Informativa / Intro -->
+  <div id="pageIntro" class="page active">
+    <h1>🌐 Modelos de TI con Inteligencia Artificial</h1>
+    <div class="intro-text">
+      <p>
+        Los modelos de Tecnología de la Información (TI) impulsados por Inteligencia Artificial representan una nueva era en la automatización, análisis y toma de decisiones inteligentes. Entre estos modelos se encuentra el modelo T5 (Text-To-Text Transfer Transformer) desarrollado por Google, el cual permite transformar cualquier tarea de procesamiento de lenguaje natural en un problema de entrada-salida de texto.
+      </p><br/>
+      <p>
+        Gracias a estos avances, ahora es posible realizar resúmenes automáticos, responder preguntas, generar cuestionarios y traducir textos con una precisión impresionante. Estas herramientas permiten ahorrar tiempo, mejorar la comprensión lectora y aumentar la productividad en contextos educativos, profesionales y científicos.
+      </p><br/>
+      <p>
+        Esta plataforma te permite experimentar con estas capacidades de forma interactiva. A continuación, podrás acceder a un entorno inteligente donde podrás probar el poder de los modelos T5 de manera simple y visual.
+      </p>
+    </div>
+    <div class="center">
+      <button onclick="mostrarPagina('main')">👉 Ir a Herramientas Inteligentes</button>
+    </div>
   </div>
 
-  <!-- Página principal -->
-  <div id="main">
-    <h1>🔷 Interfaz Inteligente - Modelos de TI 🔷</h1>
+  <!-- Página Principal con Apartados -->
+  <div id="pageMain" class="page">
+    <h1>🔷 Interfaz Inteligente - Herramientas IA 🔷</h1>
 
     <div class="section">
       <h2>📄 Resumen</h2>
@@ -182,19 +152,23 @@
       <button onclick="enviarTexto('traducir')">Traducir</button>
       <div class="output" id="traducirOutput"></div>
     </div>
+
+    <div class="center">
+      <button onclick="mostrarPagina('intro')">🔙 Volver a Información</button>
+    </div>
   </div>
 
   <script>
-    // Esperar a que termine la animación de typing antes de mostrar la página principal
-    window.addEventListener('load', () => {
-      const textoAnimado = document.querySelector('.tech-text');
-      textoAnimado.addEventListener('animationend', () => {
-        setTimeout(() => {
-          document.getElementById('loading').style.display = 'none';
-          document.getElementById('main').style.display = 'block';
-        }, 1500); // tiempo extra después de la animación
-      });
-    });
+    function mostrarPagina(pagina) {
+      document.getElementById('pageIntro').classList.remove('active');
+      document.getElementById('pageMain').classList.remove('active');
+
+      if (pagina === 'main') {
+        document.getElementById('pageMain').classList.add('active');
+      } else {
+        document.getElementById('pageIntro').classList.add('active');
+      }
+    }
 
     function enviarTexto(tipo) {
       const input = document.getElementById(`${tipo}Input`).value;
