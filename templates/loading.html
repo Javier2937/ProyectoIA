@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXAMEN</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  
+
+</head>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+   <div id="pageIntro" class="page active">
+    <h1>🌐 Modelos de TI con Inteligencia Artificial</h1>
+    <div class="intro-text">
+      <p>
+       
+      </p><br />
+      <p>
+        Gracias a estos avances, ahora es posible realizar resúmenes automáticos, responder preguntas, generar
+        cuestionarios y traducir textos con una precisión impresionante. Estas herramientas permiten ahorrar tiempo,
+        mejorar la comprensión lectora y aumentar la productividad en contextos educativos, profesionales y científicos.
+      </p><br />
+      <p>
+        Esta plataforma te permite experimentar con estas capacidades de forma interactiva. A continuación, podrás
+        acceder a un entorno inteligente donde podrás probar el poder de los modelos T5 de manera simple y visual.
+      </p>
+    </div>
+    <div class="center">
+      <button onclick="mostrarPagina('main')">👉 Ir a Herramientas Inteligentes</button>
+    </div>
+  </div>
+   <!-- Página Principal con Apartados -->
+  <div id="pageMain" class="page">
+    <h1>🔷 Interfaz Inteligente - Herramientas IA 🔷</h1>
+
+    <div class="center">
+      <button onclick="mostrarPagina('main')">👉 Ir a Herramientas Inteligentes</button>
+    </div>
+  </div>
+
+
+<body>
+    <div class="section">
+      <h2> Resumen</h2>
+      <!-- Formulario para t5 -->
+      <form onsubmit="resumenT5(event)">
+        <textarea id="textoT5" placeholder="Escribe el texto a resumir..."></textarea>
+        <button type="submit">Procesar Resumen</button>
+      </form>
+      <!-- Spinner (oculto inicialmente) -->
+      <div id="spinner" class="spinner-border text-primary my-5" role="status" style="display: none;">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <div class="output" id="resumenT5"></div>
+    </div>
+    
+    <div class="section">
+      <h2> Generar Pregunta</h2>
+      <textarea id="generar_preguntaInput" placeholder="Escribe un texto para generar preguntas..."></textarea>
+      <button onclick="enviarTexto('generar_pregunta')">Generar Pregunta</button>
+      <div class="output" id="generar_preguntaOutput"></div>
+    </div>
+
+    <div class="section">
+      <h2>🌐 Traducir</h2>
+      <form onsubmit="traducirTexto(event)">
+        <textarea id="textoTraducir" placeholder="Escribe el texto a traducir..."></textarea>
+        <button type="submit">Traducir</button>
+      </form>
+      <div id="spinnerTraducir" class="spinner-border text-primary my-5" role="status" style="display: none;">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <div class="output" id="resultadoTraducir"></div>
+    </div>
+
+    
+   <div class="section">
+      <h2>❓ Pregunta</h2>
+      <textarea id="preguntaInput" placeholder="Escribe una pregunta sobre un texto..."></textarea>
+      <button onclick="enviarTexto('pregunta')">Responder Pregunta</button>
+      <div class="output" id="preguntaOutput"></div>
+    </div>
+
+<div class="center">
+      <button onclick="mostrarPagina('intro')">🔙 Volver a Información</button>
+    </div>
+  </div>
+    
+   
+    
+
+  <script>
+    function mostrarPagina(pagina) {
+      document.getElementById('pageIntro').classList.remove('active');
+      document.getElementById('pageMain').classList.remove('active');
+
+      if (pagina === 'main') {
+        document.getElementById('pageMain').classList.add('active');
+      } else {
+        document.getElementById('pageIntro').classList.add('active');
+      }
+    }
+
+    function enviarTexto(tipo) {
+      const input = document.getElementById(`${tipo}Input`).value;
+      if (!input.trim()) {
+        alert("Por favor escribe algo primero.");
+        return;
+      }
+
+      fetch(`http://localhost:5000/${tipo}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ texto: input })
+      })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById(`${tipo}Output`).innerText = data.resultado;
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById(`${tipo}Output`).innerText = "Error al procesar la solicitud.";
+        });
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>
