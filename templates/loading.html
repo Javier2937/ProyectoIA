@@ -4,24 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modelos de TI Inteligentes</title>
+  <title>EXAMEN</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+  
 
 </head>
 
-<body>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 
-  <!-- Página Informativa / Intro -->
-  <div id="pageIntro" class="page active">
+   <div id="pageIntro" class="page active">
     <h1>🌐 Modelos de TI con Inteligencia Artificial</h1>
     <div class="intro-text">
       <p>
-        Los modelos de Tecnología de la Información (TI) impulsados por Inteligencia Artificial representan una nueva
-        era en la automatización, análisis y toma de decisiones inteligentes. Entre estos modelos se encuentra el modelo
-        T5 (Text-To-Text Transfer Transformer) desarrollado por Google, el cual permite transformar cualquier tarea de
-        procesamiento de lenguaje natural en un problema de entrada-salida de texto.
+       
       </p><br />
       <p>
         Gracias a estos avances, ahora es posible realizar resúmenes automáticos, responder preguntas, generar
@@ -37,13 +33,19 @@
       <button onclick="mostrarPagina('main')">👉 Ir a Herramientas Inteligentes</button>
     </div>
   </div>
-
-  <!-- Página Principal con Apartados -->
+   <!-- Página Principal con Apartados -->
   <div id="pageMain" class="page">
     <h1>🔷 Interfaz Inteligente - Herramientas IA 🔷</h1>
 
+    <div class="center">
+      <button onclick="mostrarPagina('main')">👉 Ir a Herramientas Inteligentes</button>
+    </div>
+  </div>
+
+
+<body>
     <div class="section">
-      <h2>📄 Resumen</h2>
+      <h2> Resumen</h2>
       <!-- Formulario para t5 -->
       <form onsubmit="resumenT5(event)">
         <textarea id="textoT5" placeholder="Escribe el texto a resumir..."></textarea>
@@ -55,16 +57,9 @@
       </div>
       <div class="output" id="resumenT5"></div>
     </div>
-
+    
     <div class="section">
-      <h2>❓ Pregunta</h2>
-      <textarea id="preguntaInput" placeholder="Escribe una pregunta sobre un texto..."></textarea>
-      <button onclick="enviarTexto('pregunta')">Responder Pregunta</button>
-      <div class="output" id="preguntaOutput"></div>
-    </div>
-
-    <div class="section">
-      <h2>🧠 Generar Pregunta</h2>
+      <h2> Generar Pregunta</h2>
       <textarea id="generar_preguntaInput" placeholder="Escribe un texto para generar preguntas..."></textarea>
       <button onclick="enviarTexto('generar_pregunta')">Generar Pregunta</button>
       <div class="output" id="generar_preguntaOutput"></div>
@@ -82,10 +77,21 @@
       <div class="output" id="resultadoTraducir"></div>
     </div>
 
-    <div class="center">
+    
+   <div class="section">
+      <h2>❓ Pregunta</h2>
+      <textarea id="preguntaInput" placeholder="Escribe una pregunta sobre un texto..."></textarea>
+      <button onclick="enviarTexto('pregunta')">Responder Pregunta</button>
+      <div class="output" id="preguntaOutput"></div>
+    </div>
+
+<div class="center">
       <button onclick="mostrarPagina('intro')">🔙 Volver a Información</button>
     </div>
   </div>
+    
+   
+    
 
   <script>
     function mostrarPagina(pagina) {

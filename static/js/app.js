@@ -57,8 +57,8 @@ function traducirTexto(event) {
     .then(data => {
         spinner.style.display = "none";  // Oculta spinner
 
-                if (data.resumen) {
-                    resultado.textContent = data.resumen;
+                if (data.traduccion) {
+                    resultado.textContent = data.traduccion;
                 } else {
                     resultado.textContent = "Error: " + data.error;
                 }
@@ -70,4 +70,29 @@ function traducirTexto(event) {
 
     //
     console.log(texto);
+}
+function enviarTexto(tipo) {
+  const input = document.getElementById(`${tipo}Input`).value;
+  if (!input.trim()) {
+    alert("Por favor escribe algo primero.");
+    return;
+  }
+
+  fetch(`http://localhost:5000/${tipo}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ texto: input })  // 👈 asegúrate que se llama "texto"
+  })
+    .then(res => res.json())
+    .then(data => {
+
+        
+      document.getElementById(`${tipo}Output`).innerText = data.resultado;
+    })
+    .catch(err => {
+      console.error(err);  // 👈 Aquí se imprime el error del fetch
+      document.getElementById(`${tipo}Output`).innerText = "Error al procesar la solicitud.";
+    });
 }
